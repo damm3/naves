@@ -8,12 +8,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+// http://millionthvector.blogspot.com/p/free-sprites.html
+
 public class MyGdxGame extends ApplicationAdapter {
 
 
 	SpriteBatch batch;
 	Fondo fondo;
 	Nave nave;
+
 
 	@Override
 	public void create () {
