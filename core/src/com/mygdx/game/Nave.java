@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Nave {
     Texture texture;
     float x, y;
+    Bala bala;
 
     Nave(){
         texture =  new Texture("nave.png");
@@ -17,13 +18,20 @@ public class Nave {
 
     void render(SpriteBatch batch){
         batch.draw(texture, x, y);
+
+        if (bala != null) {
+            bala.render(batch);
+        }
     }
 
     void update(){
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) x += 1;
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) x -= 1;
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) y += 1;
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) y -= 1;
-    }
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) x += 1;
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) x -= 1;
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) y += 1;
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) y -= 1;
 
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+           bala = new Bala();
+        }
+    }
 }

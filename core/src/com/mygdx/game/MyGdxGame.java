@@ -10,14 +10,15 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyGdxGame extends ApplicationAdapter {
 
-	Texture fondo;
+
 	SpriteBatch batch;
+	Fondo fondo;
 	Nave nave;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		fondo = new Texture("fondo.jpg");
+		fondo = new Fondo();
 		nave = new Nave();
 	}
 
@@ -29,8 +30,9 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		nave.update();
 
+
 		batch.begin();
-		batch.draw(fondo, 0,0);
+		fondo.render(batch);
 		nave.render(batch);
 		batch.end();
 	}
