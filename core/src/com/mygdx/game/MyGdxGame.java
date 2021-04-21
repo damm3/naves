@@ -12,11 +12,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyGdxGame extends ApplicationAdapter {
 
-
 	SpriteBatch batch;
 	Fondo fondo;
 	Nave nave;
-
 
 	@Override
 	public void create () {
