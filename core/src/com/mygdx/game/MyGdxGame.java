@@ -22,11 +22,12 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+
+		nave.update();
+
 		batch.begin();
 		batch.draw(fondo, 0,0);
-
 		nave.render(batch);
-
 		batch.end();
 	}
 }
