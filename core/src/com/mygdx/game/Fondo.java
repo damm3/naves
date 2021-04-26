@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Fondo {
     Texture texture;
 
+
     Fondo(){
-        texture = new Texture("fondo.jpg");
+        texture = new Texture("black.png");
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(texture, 0,0);
+        batch.draw(texture, 0,0, 640, 480);
     }
 }

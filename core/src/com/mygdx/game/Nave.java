@@ -10,15 +10,16 @@ import java.util.List;
 
 public class Nave {
     Texture texture;
-    float x, y, w, h;
+    float x, y, w, h, v;
     List<Bala> balas;
 
     Nave(){
-        texture =  new Texture("nave.png");
+        texture = new Texture("nave.png");
         x = 100;
         y = 100;
-        w = 100;
-        h = 200;
+        w = 50;
+        h = 100;
+        v = 5;
         balas = new ArrayList<>();
     }
 
@@ -35,10 +36,10 @@ public class Nave {
             bala.update();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) x += 1;
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) x -= 1;
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) y += 1;
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) y -= 1;
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) x += v;
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) x -= v;
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) y += v;
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) y -= v;
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
            balas.add(new Bala(x+w/2, y+h));
