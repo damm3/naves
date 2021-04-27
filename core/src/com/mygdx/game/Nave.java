@@ -13,6 +13,8 @@ public class Nave {
     float x, y, w, h, v;
     List<Bala> balas;
 
+    Temporizador fireRate;
+
     Nave(){
         texture = new Texture("nave.png");
         x = 100;
@@ -21,6 +23,7 @@ public class Nave {
         h = 100;
         v = 5;
         balas = new ArrayList<>();
+        fireRate = new Temporizador(10);
     }
 
     void render(SpriteBatch batch){

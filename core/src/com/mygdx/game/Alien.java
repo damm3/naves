@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Alien {
     Texture texture;
-    float x, y, w, h, v;
+    float x, y, w, h, vx, vy;
+    Temporizador cambioVelocidad;
 
     Alien(){
         texture = new Texture("alien.png");
@@ -13,7 +14,9 @@ public class Alien {
         y = 300;
         w = 50;
         h = 70;
-        v = 2;
+        vx = 2;
+        vy = 1;
+        cambioVelocidad = new Temporizador(60);
     }
 
     void render(SpriteBatch batch){
@@ -21,7 +24,12 @@ public class Alien {
     }
 
     public void update() {
-        y -= 1;
-        x += 1;
+        y += vy;
+        x += vx;
+
+        if(cambioVelocidad.suena()){
+            vy = MyGdxGame.random.nextInt(6)-3;
+            vx = MyGdxGame.random.nextInt(6)-3;
+        }
     }
 }
