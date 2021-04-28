@@ -2,7 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	static Random random = new Random();
 	SpriteBatch batch;
+	BitmapFont bitmapFont;
 	Fondo fondo;
 	Nave nave;
 	List<Alien> aliens = new ArrayList<>();
@@ -25,6 +28,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		bitmapFont = new BitmapFont();
+		bitmapFont.setColor(Color.WHITE);
 		fondo = new Fondo();
 		nave = new Nave();
 
@@ -53,7 +58,15 @@ public class MyGdxGame extends ApplicationAdapter {
 				if (solapan(bala.x, bala.y, bala.w, bala.h, alien.x, alien.y, alien.w, alien.h)) {
 					balasAEliminar.add(bala);
 					aliensAEliminar.add(alien);
+					nave.puntos++;
+					break;
 				}
+			}
+
+			if (!nave.muerta && solapan(alien.x, alien.y, alien.w, alien.h, nave.x, nave.y, nave.w, nave.h)) {
+				nave.vidas--;
+				nave.muerta = true;
+				nave.respawn.activar();
 			}
 		}
 		for (Bala bala:balasAEliminar) nave.balas.remove(bala);
@@ -65,6 +78,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		fondo.render(batch);
 		nave.render(batch);
 		for(Alien alien:aliens) alien.render(batch);
+		bitmapFont.draw(batch, "VIDAS: "+nave.vidas, 530, 420);
+		bitmapFont.draw(batch, "PUNTOS: "+nave.puntos, 30, 420);
 		batch.end();
 	}
 

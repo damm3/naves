@@ -12,8 +12,12 @@ public class Nave {
     Texture texture;
     float x, y, w, h, v;
     List<Bala> balas;
+    int vidas = 3;
+    int puntos = 0;
+    boolean muerta = false;
 
     Temporizador fireRate;
+    Temporizador respawn;
 
     Nave(){
         texture = new Texture("nave.png");
@@ -24,6 +28,7 @@ public class Nave {
         v = 5;
         balas = new ArrayList<>();
         fireRate = new Temporizador(10);
+        respawn = new Temporizador(120, false);
     }
 
     void render(SpriteBatch batch){
@@ -46,6 +51,12 @@ public class Nave {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
            balas.add(new Bala(x+w/2, y+h));
+        }
+
+        if(x < 0) x = 0;
+
+        if(respawn.suena()){
+            muerta = false;
         }
     }
 }
