@@ -16,20 +16,18 @@ import java.util.Random;
 public class MyGdxGame extends ApplicationAdapter {
 
 	static Random random = new Random();
-	SpriteBatch batch;
+	SpriteBatch batch = new SpriteBatch();
 	Fondo fondo;
 	Nave nave;
-	List<Alien> aliens;
+	List<Alien> aliens = new ArrayList<>();
 	List<Bala> balasAEliminar = new ArrayList<>();
 	List<Alien> aliensAEliminar = new ArrayList<>();
 	Temporizador temporizadorNuevoAlien;
 
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
 		fondo = new Fondo();
 		nave = new Nave();
-		aliens = new ArrayList<>();
 
 		aliens.add(new Alien());
 
@@ -43,30 +41,25 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		Temporizador.tiempoJuego += 1;
 
-		if(temporizadorNuevoAlien.suena()){
-			aliens.add(new Alien());
-		}
+		if (temporizadorNuevoAlien.suena()) aliens.add(new Alien());
 
 		nave.update();
-		for(Alien alien:aliens) alien.update();
+		for (Alien alien:aliens) alien.update();
 
 
 		balasAEliminar.clear();
 		aliensAEliminar.clear();
-		for(Alien alien: aliens){
-			for(Bala bala: nave.balas){
+		for (Alien alien: aliens) {
+			for (Bala bala: nave.balas) {
 				if (overlap(bala.x, bala.y, bala.w, bala.h, alien.x, alien.y, alien.w, alien.h)) {
 					balasAEliminar.add(bala);
 					aliensAEliminar.add(alien);
 				}
 			}
 		}
-		for (Bala bala:balasAEliminar){
-			nave.balas.remove(bala);
-		}
-		for (Alien alien:aliensAEliminar) {
-			aliens.remove(alien);
-		}
+		for (Bala bala:balasAEliminar) nave.balas.remove(bala);
+		for (Alien alien:aliensAEliminar) aliens.remove(alien);
+
 
 
 		batch.begin();
