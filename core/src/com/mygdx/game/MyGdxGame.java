@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -50,37 +51,33 @@ public class MyGdxGame extends ApplicationAdapter {
 		for(Alien alien:aliens) alien.update();
 
 
-		boolean heEliminado = false;
-		for(Bala bala:nave.balas){
-			for(Alien alien:aliens){
-				if (!(bala.x > alien.x + alien.w) && !(bala.x + bala.w < alien.x)
-						&&
-						!(bala.y > alien.y + alien.h) && !(bala.y + bala.h < alien.y)) {
-
-					aliensAEliminar.add(alien);
+		balasAEliminar.clear();
+		aliensAEliminar.clear();
+		for(Alien alien: aliens){
+			for(Bala bala: nave.balas){
+				if (overlap(bala.x, bala.y, bala.w, bala.h, alien.x, alien.y, alien.w, alien.h)) {
 					balasAEliminar.add(bala);
-					heEliminado = true;
+					aliensAEliminar.add(alien);
 				}
 			}
 		}
-
-		for(Alien alien: aliensAEliminar){
+		for (Bala bala:balasAEliminar){
+			nave.balas.remove(bala);
+		}
+		for (Alien alien:aliensAEliminar) {
 			aliens.remove(alien);
 		}
 
-		for(Bala bala: balasAEliminar){
-			nave.balas.remove(bala);
-		}
 
-		if(heEliminado){
-			aliensAEliminar.clear();
-			balasAEliminar.clear();
-		}
 		batch.begin();
 		fondo.render(batch);
 		nave.render(batch);
 		for(Alien alien:aliens) alien.render(batch);
 		batch.end();
+	}
+
+	boolean overlap(float x, float y, float w, float h, float x2, float y2, float w2, float h2){
+		return !(x > x2 + w2) && !(x + w < x2) && !(y > y2 + h2) && !(y + h < y2);
 	}
 }
 
