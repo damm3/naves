@@ -1,7 +1,5 @@
 package com.mygdx.game;
 
-import sun.awt.X11.XReparentEvent;
-
 public class Temporizador {
     static int tiempoJuego;
     int alarma;
@@ -9,26 +7,22 @@ public class Temporizador {
     boolean repetir = true;
     boolean activo = true;
 
-    Temporizador(int f){
-        frecuencia = f;
-        alarma = tiempoJuego + f;
+    Temporizador(int frecuencia) {
+        this.frecuencia = frecuencia;
+        alarma = tiempoJuego + frecuencia;
     }
 
-    Temporizador(int f, boolean r){
-        frecuencia = f;
-        alarma = tiempoJuego + f;
-        repetir = r;
+    Temporizador(int frecuencia, boolean repetir) {
+        this.frecuencia = frecuencia;
+        alarma = tiempoJuego + frecuencia;
+        this.repetir = repetir;
     }
 
     public boolean suena() {
-        if(activo) {
-            if (tiempoJuego == alarma) {
-                alarma = tiempoJuego + frecuencia;
-                if(!repetir) {
-                    activo = false;
-                }
-                return true;
-            }
+        if (activo && tiempoJuego >= alarma) {
+            alarma = tiempoJuego + frecuencia;
+            if (!repetir) activo = false;
+            return true;
         }
         return false;
     }
