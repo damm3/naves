@@ -2,13 +2,19 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
-    Animacion animacion = new Animacion(6f, true, "express_0.png", "express_1.png");
+    Animacion animacion = new Animacion(16,
+            new Texture("express_0.png"),
+            new Texture("express_1.png"),
+            new Texture("express_0.png")
+    );
+
     float x, y, w, h, v;
     List<Disparo> disparos = new ArrayList<>();
     int vidas = 3;
@@ -17,11 +23,12 @@ public class Jugador {
     Temporizador temporizadorFireRate = new Temporizador(20);
     Temporizador temporizadorRespawn = new Temporizador(120, false);
 
+    int anim = 0;
     Jugador() {
         x = 100;
         y = 100;
-        w = 43 * 2;
-        h = 21 * 2;
+        w = 43 * 8;
+        h = 21 * 8;
         v = 5;
     }
 
@@ -45,9 +52,9 @@ public class Jugador {
     }
 
     void render(SpriteBatch batch) {
-        if (muerto) batch.setColor(1, 1, 1, 0.25f);
-        batch.draw(animacion.getFrame(Temporizador.tiempoJuego), x, y, w, h);
-        if (muerto) batch.setColor(1, 1, 1, 1);
+
+        batch.draw(animacion.obtenerFrame(), x, y, w, h);
+
 
         for (Disparo disparo : disparos) disparo.render(batch);
     }

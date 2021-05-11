@@ -1,9 +1,10 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Enemigo {
-    Animacion animacion = new Animacion(6, true, "nimbus_0.png", "nimbus_1.png");
+    Texture texture = new Texture("nimbus_0.png");
     float x, y, w, h, vx, vy;
     Temporizador cambioVelocidad = new Temporizador(60);
 
@@ -27,6 +28,6 @@ public class Enemigo {
     }
 
     void render(SpriteBatch batch) {
-        batch.draw(animacion.getFrame(Temporizador.tiempoJuego), x, y, w, h);
+        batch.draw(texture, x, y, w, h);
     }
 }

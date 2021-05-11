@@ -34,7 +34,7 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     void update() {
-        Temporizador.tiempoJuego += 1;
+        Temporizador.framesJuego += 1;
 
         if (temporizadorNuevoAlien.suena()) enemigos.add(new Enemigo());
 
@@ -85,6 +85,13 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.end();
     }
 }
+
+
+
+
+
+
+
 
 /*
 

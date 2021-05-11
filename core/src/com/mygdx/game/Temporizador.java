@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 public class Temporizador {
-    static int tiempoJuego;
+    static int framesJuego;
     int alarma;
     int frecuencia;
     boolean repetir = true;
@@ -9,18 +9,18 @@ public class Temporizador {
 
     Temporizador(int frecuencia) {
         this.frecuencia = frecuencia;
-        alarma = tiempoJuego + frecuencia;
+        alarma = framesJuego + frecuencia;
     }
 
     Temporizador(int frecuencia, boolean repetir) {
         this.frecuencia = frecuencia;
-        alarma = tiempoJuego + frecuencia;
+        alarma = framesJuego + frecuencia;
         this.repetir = repetir;
     }
 
     public boolean suena() {
-        if (activo && tiempoJuego >= alarma) {
-            alarma = tiempoJuego + frecuencia;
+        if (activo && framesJuego >= alarma) {
+            alarma = framesJuego + frecuencia;
             if (!repetir) activo = false;
             return true;
         }
@@ -29,6 +29,6 @@ public class Temporizador {
 
     public void activar() {
         activo = true;
-        alarma = tiempoJuego + frecuencia;
+        alarma = framesJuego + frecuencia;
     }
 }
