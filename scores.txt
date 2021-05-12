@@ -1,0 +1,20 @@
+alan,999
+juan carlos,1
+alan,0
+juan carlos,1
+alan,0
+juan carlos,1
+alan,0
+juan carlos,1
+alan,0
+juan carlos,1
+alan,0
+juan carlos,1
+alan,0
+juan carlos,100000
+alan,0
+alan,0
+alan,9999
+alan,77777
+alan,0
+alan,0

@@ -23,12 +23,11 @@ public class Jugador {
     Temporizador temporizadorFireRate = new Temporizador(20);
     Temporizador temporizadorRespawn = new Temporizador(120, false);
 
-    int anim = 0;
     Jugador() {
         x = 100;
         y = 100;
-        w = 43 * 8;
-        h = 21 * 8;
+        w = 43 * 3;
+        h = 21 * 3;
         v = 5;
     }
 
@@ -52,10 +51,7 @@ public class Jugador {
     }
 
     void render(SpriteBatch batch) {
-
         batch.draw(animacion.obtenerFrame(), x, y, w, h);
-
-
         for (Disparo disparo : disparos) disparo.render(batch);
     }
 
