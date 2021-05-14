@@ -19,9 +19,9 @@ public class MyGdxGame extends ApplicationAdapter {
     List<Enemigo> enemigos;
     List<Disparo> disparosAEliminar;
     List<Enemigo> enemigosAEliminar;
-    Temporizador temporizadorNuevoAlien;
-    private ScoreBoard scoreboard;
-    private boolean gameover;
+    Temporizador temporizadorNuevoEnemigo;
+    ScoreBoard scoreboard;
+    boolean gameover;
 
 
     @Override
@@ -32,14 +32,14 @@ public class MyGdxGame extends ApplicationAdapter {
         font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         font.getData().setScale(2f);
 
-        initGame();
+        inicializarJuego();
     }
 
-    void initGame(){
+    void inicializarJuego(){
         fondo = new Fondo();
         jugador = new Jugador();
         enemigos = new ArrayList<>();
-        temporizadorNuevoAlien = new Temporizador(120);
+        temporizadorNuevoEnemigo = new Temporizador(120);
         disparosAEliminar = new ArrayList<>();
         enemigosAEliminar = new ArrayList<>();
         scoreboard = new ScoreBoard();
@@ -50,7 +50,7 @@ public class MyGdxGame extends ApplicationAdapter {
     void update() {
         Temporizador.framesJuego += 1;
 
-        if (temporizadorNuevoAlien.suena()) enemigos.add(new Enemigo());
+        if (temporizadorNuevoEnemigo.suena()) enemigos.add(new Enemigo());
 
         if(!gameover) jugador.update();
 
@@ -68,7 +68,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
             if (!gameover && !jugador.muerto && Utils.solapan(enemigo.x, enemigo.y, enemigo.w, enemigo.h, jugador.x, jugador.y, jugador.w, jugador.h)) {
                 jugador.morir();
-                if (jugador.vidas == 2){
+                if (jugador.vidas == 0){
                     gameover = true;
                 }
             }
@@ -88,7 +88,7 @@ public class MyGdxGame extends ApplicationAdapter {
         if(gameover) {
             int result = scoreboard.update(jugador.puntos);
             if(result == 1) {
-                initGame();
+                inicializarJuego();
             } else if (result == 2) {
                 Gdx.app.exit();
             }
