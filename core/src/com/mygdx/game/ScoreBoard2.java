@@ -46,7 +46,7 @@ public class ScoreBoard2 {
     public void saveScore(int puntos) {
         try {
             FileWriter fileWriter = new FileWriter("scores.txt", true);
-            fileWriter.append("jugador:" + puntos +"\n");
+            fileWriter.append("jugador," + puntos +"\n");
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class ScoreBoard2 {
     public void loadScores(){
         try {
             Scanner scanner = new Scanner(new File("scores.txt"));
-            scanner.useDelimiter(":|\n");
+            scanner.useDelimiter(",|\n");
             scoreList.clear();
             while(scanner.hasNext()) {
                 String name = scanner.next();

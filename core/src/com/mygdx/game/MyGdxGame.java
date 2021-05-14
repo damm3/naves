@@ -16,10 +16,10 @@ public class MyGdxGame extends ApplicationAdapter {
     BitmapFont font;
     Fondo fondo;
     Jugador jugador;
-    List<Enemigo> enemigos = new ArrayList<>();
-    List<Disparo> disparosAEliminar = new ArrayList<>();
-    List<Enemigo> enemigosAEliminar = new ArrayList<>();
-    Temporizador temporizadorNuevoAlien = new Temporizador(120);
+    List<Enemigo> enemigos;
+    List<Disparo> disparosAEliminar;
+    List<Enemigo> enemigosAEliminar;
+    Temporizador temporizadorNuevoAlien;
     private ScoreBoard scoreboard;
     private boolean gameover;
 
@@ -32,9 +32,19 @@ public class MyGdxGame extends ApplicationAdapter {
         font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         font.getData().setScale(2f);
 
+        initGame();
+    }
+
+    void initGame(){
         fondo = new Fondo();
         jugador = new Jugador();
+        enemigos = new ArrayList<>();
+        temporizadorNuevoAlien = new Temporizador(120);
+        disparosAEliminar = new ArrayList<>();
+        enemigosAEliminar = new ArrayList<>();
         scoreboard = new ScoreBoard();
+
+        gameover = false;
     }
 
     void update() {
@@ -42,12 +52,9 @@ public class MyGdxGame extends ApplicationAdapter {
 
         if (temporizadorNuevoAlien.suena()) enemigos.add(new Enemigo());
 
-        if(!gameover) {
-            jugador.update();
-        }
+        if(!gameover) jugador.update();
 
         for (Enemigo enemigo : enemigos) enemigo.update();              // enemigos.forEach(Enemigo::update);
-
 
         for (Enemigo enemigo : enemigos) {
             for (Disparo disparo : jugador.disparos) {
@@ -63,7 +70,6 @@ public class MyGdxGame extends ApplicationAdapter {
                 jugador.morir();
                 if (jugador.vidas == 2){
                     gameover = true;
-                    scoreboard.guardarPuntuacion(jugador.puntos);
                 }
             }
 
@@ -78,6 +84,15 @@ public class MyGdxGame extends ApplicationAdapter {
         for (Enemigo enemigo : enemigosAEliminar) enemigos.remove(enemigo);               // enemigosAEliminar.forEach(enemigo -> enemigos.remove(enemigo));
         disparosAEliminar.clear();
         enemigosAEliminar.clear();
+
+        if(gameover) {
+            int result = scoreboard.update(jugador.puntos);
+            if(result == 1) {
+                initGame();
+            } else if (result == 2) {
+                Gdx.app.exit();
+            }
+        }
     }
 
     @Override
@@ -95,7 +110,6 @@ public class MyGdxGame extends ApplicationAdapter {
         font.draw(batch, "" + jugador.puntos, 30, 440);
 
         if (gameover){
-
             scoreboard.render(batch, font);
         }
         batch.end();

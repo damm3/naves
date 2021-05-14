@@ -1,20 +1,7 @@
-alan,999
-juan carlos,1
-alan,0
-juan carlos,1
-alan,0
-juan carlos,1
-alan,0
-juan carlos,1
-alan,0
-juan carlos,1
-alan,0
-juan carlos,1
-alan,0
-juan carlos,100000
-alan,0
-alan,0
-alan,9999
-alan,77777
-alan,0
-alan,0
+FED,1022
+CHB,804
+ACB,123
+ABC,760
+ECF,10
+CYV,232
+YBE,303

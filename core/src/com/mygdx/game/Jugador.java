@@ -39,7 +39,7 @@ public class Jugador {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) y += v;
         if (Gdx.input.isKeyPressed(Input.Keys.S)) y -= v;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && temporizadorFireRate.suena() && !muerto) {
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER) && temporizadorFireRate.suena() && !muerto) {
             disparos.add(new Disparo(x + w / 2, y + h));
         }
 
